@@ -43,8 +43,7 @@ public class UserMealsUtil {
                     userMeal.getDateTime().toEpochSecond(ZoneOffset.UTC) <
                     endTime.atDate(userMeal.getDateTime().toLocalDate()).toEpochSecond(ZoneOffset.UTC)){
                 for (UserMeal userMeal1: meals){
-                    if (Date.from(userMeal.getDateTime().atZone(ZoneOffset.UTC).toInstant()).equals(
-                            Date.from(userMeal1.getDateTime().atZone(ZoneOffset.UTC).toInstant()))){
+                    if ((userMeal.getDateTime().toLocalDate()).equals(userMeal1.getDateTime().toLocalDate())){
                         summaryCallories = summaryCallories + userMeal1.getCalories();
                     }
                 }
@@ -61,10 +60,9 @@ public class UserMealsUtil {
                 startTime.atDate(m.getDateTime().toLocalDate()).toEpochSecond(ZoneOffset.UTC) &&
                 m.getDateTime().toEpochSecond(ZoneOffset.UTC) <
                         endTime.atDate(m.getDateTime().toLocalDate()).toEpochSecond(ZoneOffset.UTC)).map(
-                m -> new UserMealWithExcess(
-                m.getDateTime(), m.getDescription(), m.getCalories(), caloriesPerDay <= meals.stream().filter(m1 ->
-                Date.from(m1.getDateTime().atZone(ZoneOffset.UTC).toInstant()).equals(
-                        Date.from(m.getDateTime().atZone(ZoneOffset.UTC).toInstant()))).mapToInt(
+                m2 -> new UserMealWithExcess(
+                m2.getDateTime(), m2.getDescription(), m2.getCalories(), caloriesPerDay < meals.stream().filter(m1 ->
+                m2.getDateTime().toLocalDate().equals(m1.getDateTime().toLocalDate())).mapToInt(
                                 UserMeal::getCalories).sum())).collect(Collectors.toList());
     }
 }
