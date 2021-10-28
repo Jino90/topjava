@@ -13,5 +13,5 @@ VALUES ('USER', 100000),
        ('ADMIN', 100001);
 
 INSERT INTO meals (description, calories) values ('eda', 231);
-INSERT INTO meals (description, calories) values ('ewe_eda', 543);
-INSERT INTO meals (description, calories) values ('eda_edy', 543);
+INSERT INTO meals (datetime, description, calories) values ('2021-10-28 04:01:52.47104', 'ewe_eda', 543);
+INSERT INTO meals (datetime, description, calories) values ('2021-10-28 04:02:52.47104', 'eda_edy', 543);
